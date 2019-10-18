@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [name, setName] = useState('Yuki')
+
+  useEffect(() => {
+    console.log(count);
+    document.title = `You clicked ${count} times`;
+  }, [count])
+
+  useEffect(() => {
+    console.log(name)
+  })
+
   return (
     <div className="App">
       <header className="App-header">
@@ -26,6 +37,9 @@ function App() {
           </button>
           <button onClick={() => setCount(count - 1)}>
             Click minus
+          </button>
+          <button onClick={() => setName('Yuki Tsurumi')}>
+            cleck change name {name}
           </button>
         </div>
       </header>
