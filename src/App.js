@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
+import './styles/tailwind.css'
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,7 +14,7 @@ function App() {
 
   useEffect(() => {
     console.log(name)
-  })
+  }, [name])
 
   return (
     <div className="App">
@@ -30,15 +31,15 @@ function App() {
         >
           Learn React
         </a>
-        <div>
+        <div className="bg-gray-100 text-gray-600 w-full">
           <p>You clicked {count} times</p>
-          <button onClick={() => setCount(count + 1)}>
+          <button onClick={() => setCount(count + 1)} className="border">
             Click me
           </button>
-          <button onClick={() => setCount(count - 1)}>
+          <button onClick={() => setCount(count - 1)} className="border">
             Click minus
           </button>
-          <button onClick={() => setName('Yuki Tsurumi')}>
+          <button onClick={() => setName('Yuki Tsurumi')} className="border">
             cleck change name {name}
           </button>
         </div>
