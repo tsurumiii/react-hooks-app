@@ -23,9 +23,24 @@ function useCountHook() {
   return [count, setCount];
 }
 
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  });
+
+  return width;
+}
+
 function App() {
   const [count, setCount] = useCountHook()
   const [user, setUser] = useUserHook()
+  const width = useWindowWidth();
 
   function Reset() {
     console.log('Reset()')
@@ -48,8 +63,8 @@ function App() {
         >
           Learn React
         </a>
-        <div className="bg-gray-100 text-gray-600 w-full">
-          <p>You clicked {count} times</p>
+        <div className='bg-gray-100 text-gray-600 w-full'>
+          <p>You clicked {count} {width} times</p>
           <div className="flex justify-around mb-2">
             <button onClick={() => setCount(count + 1)} className="block border px-2 px-2 rounded bg-blue-500 hover:bg-blue-400 text-white">
               Click plus
