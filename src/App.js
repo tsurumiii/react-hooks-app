@@ -27,6 +27,12 @@ function App() {
   const [count, setCount] = useCountHook()
   const [user, setUser] = useUserHook()
 
+  function Reset() {
+    console.log('Reset()')
+    setCount(0)
+    setUser('tsurumi')
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -46,13 +52,16 @@ function App() {
           <p>You clicked {count} times</p>
           <div className="flex justify-around mb-2">
             <button onClick={() => setCount(count + 1)} className="block border px-2 px-2 rounded bg-blue-500 hover:bg-blue-400 text-white">
-              Click me
+              Click plus
             </button>
             <button onClick={() => setCount(count - 1)} className="block px-2 border rounded bg-teal-600 hover:bg-teal-400 text-white">
               Click minus
             </button>
             <button onClick={() => setUser('Yuki Tsurumi')} className="block px-2 rounded bg-red-500 hover:bg-red-400 text-black hover:text-white border">
               cleck change name {user}
+            </button>
+            <button onClick={() => Reset()} className="block border px-2 px-2 rounded bg-green-500 hover:bg-green-400 text-white">
+              Reset
             </button>
           </div>
         </div>
