@@ -63,7 +63,7 @@ function App() {
         >
           Learn React
         </a>
-        <div className='bg-gray-100 text-gray-600 w-full'>
+        <div className='bg-gray-900 text-gray-600 w-full'>
           <p>You clicked {count} {width} times</p>
           <div className="flex justify-around mb-2">
             <button onClick={() => setCount(count + 1)} className="block border px-2 px-2 rounded bg-blue-500 hover:bg-blue-400 text-white">
@@ -78,6 +78,20 @@ function App() {
             <button onClick={() => Reset()} className="block border px-2 px-2 rounded bg-green-500 hover:bg-green-400 text-white">
               Reset
             </button>
+          </div>
+          <div>
+            <div className="mt-20 flex w-1/2">
+              <div className="w-full max-w-sm mx-auto">
+                <input
+                  type="text"
+                  className="flex-1 bg-gray-200 hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-300 appearance-none border border-transparent rounded w-full py-2 px-4 text-gray-700 leading-tight"
+                  placeholder="todoを入力してね"
+                />
+              </div>
+              <button
+                className="ml-4 flex-shrink-0 bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded"
+              >追加</button>
+            </div>
           </div>
         </div>
       </header>
