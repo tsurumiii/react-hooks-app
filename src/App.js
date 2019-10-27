@@ -37,15 +37,46 @@ function useWindowWidth() {
   return width;
 }
 
+function useTodoTask() {
+  const [task, setTask] = useState('')
+  return [task, setTask];
+}
+
+function useTodo() {
+  const [todo, setTodo] = useState([]);
+
+  useEffect(() => {
+    console.log(todo)
+  }, [todo])
+
+  return [todo, setTodo];
+}
+
 function App() {
   const [count, setCount] = useCountHook()
   const [user, setUser] = useUserHook()
   const width = useWindowWidth();
+  const [todo, setTodo] = useTodo();
+  const [task, setTask] = useTodoTask();
 
   function Reset() {
     console.log('Reset()')
     setCount(0)
     setUser('tsurumi')
+  }
+
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    setTask(event.target.value)
+  }
+
+  const addTodoFunc = () => {
+    console.log(todo)
+    setTodo([...todo, {
+      todo: task,
+      done: false,
+    }])
+    setTask('')
   }
 
   return (
@@ -63,7 +94,7 @@ function App() {
         >
           Learn React
         </a>
-        <div className='bg-gray-900 text-gray-600 w-full'>
+        <div className='bg-gray-900 text-gray-600 w-full pb-10'>
           <p>You clicked {count} {width} times</p>
           <div className="flex justify-around mb-2">
             <button onClick={() => setCount(count + 1)} className="block border px-2 px-2 rounded bg-blue-500 hover:bg-blue-400 text-white">
@@ -86,12 +117,21 @@ function App() {
                   type="text"
                   className="flex-1 bg-gray-200 hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-300 appearance-none border border-transparent rounded w-full py-2 px-4 text-gray-700 leading-tight"
                   placeholder="todoを入力してね"
+                  value={task}
+                  name="task"
+                  onChange={handleChange}
                 />
               </div>
               <button
+                onClick={addTodoFunc}
                 className="ml-4 flex-shrink-0 bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded"
               >追加</button>
             </div>
+          </div>
+          <div>
+            {todo.map((tod, index) => {
+              return <div key={index}>{tod.todo} </div>
+            })}
           </div>
         </div>
       </header>
