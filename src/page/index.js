@@ -42,21 +42,11 @@ function useTodoTask() {
   return [task, setTask];
 }
 
-function useTodo() {
-  const [todo, setTodo] = useState([]);
-
-  useEffect(() => {
-    console.log(todo)
-  }, [todo])
-
-  return [todo, setTodo];
-}
 
 function TopPage() {
   const [count, setCount] = useCountHook()
   const [user, setUser] = useUserHook()
   const width = useWindowWidth();
-  const [todo, setTodo] = useTodo();
   const [task, setTask] = useTodoTask();
 
   const store = useSelector(state => state.Topreducer)
@@ -75,14 +65,6 @@ function TopPage() {
     setTask(event.target.value)
   }
 
-  const addTodoFunc = () => {
-    console.log(todo)
-    setTodo([...todo, {
-      todo: task,
-      done: false,
-    }])
-    setTask('')
-  }
 
   const addStoreTodo = () => {
     console.log(store.todos)

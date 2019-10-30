@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles/App.css';
 import './styles/tailwind.css'
-import ReactDom from 'react-dom'
 import {
   BrowserRouter as Router,
   Route,
