@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import logo from './logo.svg';
 import './styles/App.css';
 import './styles/tailwind.css'
@@ -59,6 +60,9 @@ function App() {
   const [todo, setTodo] = useTodo();
   const [task, setTask] = useTodoTask();
 
+  const store = useSelector(state => state.Topreducer)
+  const dispatch = useDispatch();
+
   function Reset() {
     console.log('Reset()')
     setCount(0)
@@ -79,6 +83,9 @@ function App() {
     setTask('')
   }
 
+  const addStoreTodo = () => {
+    console.log(store.todos)
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -123,7 +130,7 @@ function App() {
                 />
               </div>
               <button
-                onClick={addTodoFunc}
+                onClick={addStoreTodo}
                 className="ml-4 flex-shrink-0 bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded"
               >追加</button>
             </div>
@@ -133,6 +140,13 @@ function App() {
               return <div key={index}>{tod.todo} </div>
             })}
           </div>
+          <div>
+            <h1 className="text-white">{store.num}</h1>
+          </div>
+          <button
+            onClick={() => dispatch({ type: 'INCREMENT', step: 1 })}
+            className="ml-4 flex-shrink-0 bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded"
+          >redux</button>
         </div>
       </header>
     </div >
