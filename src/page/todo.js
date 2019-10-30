@@ -69,12 +69,19 @@ function TodoPage() {
           {store.todos.map((todo, index) => {
             return (
               <div className="text-white w-64 py-4 px-4 hover:bg-gray-700 flex justify-between">
-                <div key={index} >
-                  {todo.todo}
-                </div>
+                {
+                  todo.done ?
+                    <div key={index} className="line-through">
+                      {todo.todo}
+                    </div>
+                    :
+                    <div key={index} >
+                      {todo.todo}
+                    </div>
+                }
                 <div className="flex">
                   <div onClick={() => doneTodoFunction(index)} className="border rounded px-2 py py-1 text-gray-400 hover:bg-gray-800 cursor-pointer">
-                    done
+                    {todo.done ? 'undone' : 'done'}
                   </div>
                   {
                     todo.done ?
@@ -92,6 +99,10 @@ function TodoPage() {
           })}
         </div>
       </div>
+      <div>
+        <h2 className="text-white">Last update : {(store.lastUpadate != null) ? new Date(store.lastUpadate).toString() : 'never'} </h2>
+      </div>
+
     </div>
   )
 }
