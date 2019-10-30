@@ -1,6 +1,12 @@
 const STATE = {
-  todos: [],
+  todos: [
+    {
+      todo: 'aa',
+      done: false
+    }
+  ],
   num: 0,
+  lastUnpadate: null
 }
 
 export const Topreducer = (state = STATE, action) => {
@@ -18,8 +24,18 @@ export const Topreducer = (state = STATE, action) => {
     case "ADDTODO":
       return {
         ...state,
-        todos: state.todos = [...state.todos, action.todo]
+        lastUnpadate: Date.now(),
+        todos: state.todos.concat(action.todo),
       }
+    case "DELETE_TODO":
+      {
+        const todos = state.todos.slice();
+        todos.splice(action.index, 1)
+        return { ...state, lastUnpadate: Date.now(), todos }
+      }
+    case "DONE_TODO": {
+      state.todos[action.index].done = !state.todos[action.index].done;
+    }
     default:
       return state;
   }
