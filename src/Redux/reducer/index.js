@@ -6,7 +6,7 @@ const STATE = {
     }
   ],
   num: 0,
-  lastUnpadate: null
+  lastUpadate: null
 }
 
 export const Topreducer = (state = STATE, action) => {
@@ -31,10 +31,11 @@ export const Topreducer = (state = STATE, action) => {
       {
         const todos = state.todos.slice();
         todos.splice(action.index, 1)
-        return { ...state, lastUnpadate: Date.now(), todos }
+        return { ...state, lastUpadate: Date.now(), todos }
       }
     case "DONE_TODO": {
       state.todos[action.index].done = !state.todos[action.index].done;
+      return { ...state, lastUpadate: Date.now(), }
     }
     default:
       return state;
