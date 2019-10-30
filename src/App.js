@@ -85,6 +85,14 @@ function App() {
 
   const addStoreTodo = () => {
     console.log(store.todos)
+    dispatch({
+      type: 'ADDTODO', todo: {
+        todo: task,
+        done: false,
+      }
+    })
+    setTask('')
+    console.log(store.todos)
   }
   return (
     <div className="App">
@@ -136,7 +144,7 @@ function App() {
             </div>
           </div>
           <div>
-            {todo.map((tod, index) => {
+            {store.todos.map((tod, index) => {
               return <div key={index}>{tod.todo} </div>
             })}
           </div>
