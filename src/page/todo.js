@@ -17,13 +17,11 @@ function TodoPage() {
 
 
   const handleInputChange = (event) => {
-    console.log(event.target.value)
     setInput(event.target.value)
   }
 
   const addTodoFunction = () => {
-    if (input.length != 0) {
-      console.log(input)
+    if (input.length !== 0) {
       dispatch({
         type: 'ADDTODO', todo: {
           todo: input,
@@ -35,7 +33,15 @@ function TodoPage() {
     } else {
       alert('フォームになんもないぞ')
     }
+  }
 
+  const deleteTodoFunction = (index) => {
+    console.log(index)
+    dispatch({ type: 'DELETE_TODO', index: index })
+  }
+
+  const doneTodoFunction = (index) => {
+    dispatch({ type: 'DONE_TODO', index: index })
   }
 
   return (
@@ -58,10 +64,33 @@ function TodoPage() {
           className=" ml-4 flex-shrink-0 bg-teal-500 hover:bg-teal-600 focus:outline-none focus:shadow-outline text-white font-bold py-2 px-4 rounded"
         >戻る</button>
       </div>
-      <div>
-        {store.todos.map((todo, index) => {
-          return <div key={index} className="text-white">{todo.todo}</div>
-        })}
+      <div className="flex justify-center mt-5">
+        <div>
+          {store.todos.map((todo, index) => {
+            return (
+              <div className="text-white w-64 py-4 px-4 hover:bg-gray-700 flex justify-between">
+                <div key={index} >
+                  {todo.todo}
+                </div>
+                <div className="flex">
+                  <div onClick={() => doneTodoFunction(index)} className="border rounded px-2 py py-1 text-gray-400 hover:bg-gray-800 cursor-pointer">
+                    done
+                  </div>
+                  {
+                    todo.done ?
+                      <div
+                        onClick={() => deleteTodoFunction(index)}
+                        className="border rounded ml-3 px-2 py py-1 text-gray-400 hover:bg-gray-800 cursor-pointer"
+                      >
+                        delete
+                      </div> :
+                      <div></div>
+                  }
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
